@@ -6,17 +6,27 @@ permissions:
   contents: read  # This is required for actions/checkout
 
 jobs:
-  ConnectToAWS:
+  terraform:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Git checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: configure aws credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::654763947810:role/GitHubActionsWorkflowRole # role ARN
+          role-to-assume: arn:aws:iam::654763947810:role/GitHubActionsWorkflowRole
           aws-region: us-east-1
 
-      - name: Test Connection
-        run: aws sts get-caller-identity
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
