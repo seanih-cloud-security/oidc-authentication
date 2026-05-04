@@ -15,13 +15,13 @@ Traditional CI/CD pipelines often store `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCE
 
 ### Security Comparison: Static Keys vs. OIDC
 
-| Feature              | Static Access Keys (Old Way)      | GitHub OIDC (Current Way)           |
-| :------------------- | :-------------------------------- | :---------------------------------- |
-| **Credential Life**  | Permanent (until manual rotation) | **Short-lived (expires after job)** |
-| **Storage Location** | GitHub Actions Secrets            | **No keys stored in GitHub**        |
-| **Authentication**   | Shared Secret (Key/ID)            | **Identity-based Trust (JWT)**      |
-| **Attack Surface**   | High (Leaked keys = Full access)  | **Low (Scoped to Repo & Branch)**   |
-| **Maintenance**      | High (Requires rotation policy)   | **Zero (Automated by AWS/GitHub)**  |
+| **Feature**            | **Static Access Keys** (Old Way)  | **GitHub OIDC** (Current Way)   |
+| ---------------------- | --------------------------------- | ------------------------------- |
+| **_Credential Life_**  | Permanent (until manual rotation) | Short-lived (expires after job) |
+| **_Storage Location_** | GitHub Actions Secrets            | No keys stored in GitHub        |
+| **_Authentication_**   | Shared Secret (Key/ID)            | Identity-based Trust (JWT)      |
+| **_Attack Surface_**   | High (Leaked keys = Full access)  | Low (Scoped to Repo & Branch)   |
+| **_Maintenance_**      | High (Requires rotation policy)   | Zero (Automated by AWS/GitHub)  |
 
 ---
 
@@ -57,7 +57,7 @@ The workflow begins with GitHub Actions requesting a short-lived token via OIDC.
 
 Code block highlighting the 'permissions' and 'jobs' sections from the workflow file.
 
-> _Additional steps can be configured to perform whatever actions are needed but aren't included here since they aren't the focus of the project_
+> _Additional steps can be configured to perform whatever actions are needed, but aren't included here since they're not the focus of the project._
 
 ```yaml
 name: OIDC Authentication
