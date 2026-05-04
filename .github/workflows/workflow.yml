@@ -1,16 +1,16 @@
 name: OIDC Authentication
-on: [push]
+on: [workflow_dispatch]
 
 permissions:
   id-token: write # This is required for requesting the JWT
-  contents: read  # This is required for actions/checkout
+  contents: read # This is required for actions/checkout
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout # clone repo onto the runner
         uses: actions/checkout@v4
 
       - name: Configure AWS credentials
